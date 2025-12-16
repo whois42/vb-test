@@ -19,13 +19,25 @@ npm test         # run tests
 
 ---
 
+## Features
+
+- Create, view, and edit large node networks
+- Add single node
+- Bulk generate nodes/links
+- Node selection with side panel sync
+- Unit and integration tests
+
+---
+
 ## Architecture
 
 The application is structured around three main parts:
 
+```
 NetworkVisualisator (State & orchestration)
 ├── DiagramWrapper (GoJS integration)
 └── SidePanel
+```
 
 - **NetworkVisualisator** is the single source of truth for all state:
 - nodes, links, model data, selection
