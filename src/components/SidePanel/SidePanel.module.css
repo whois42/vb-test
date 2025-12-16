@@ -1,0 +1,12 @@
+.side_panel__container {
+  display: flex;
+  flex-direction: column;
+  min-width: 16rem;
+  border-right: 1px solid #e0e0e0;
+}
+.side_panel__container_header {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1rem;
+}

@@ -1,0 +1,22 @@
+.nodes_list__container_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  line-height: 1rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.nodes_list__ctrl {
+  width: 1rem;
+  height: 1rem;
+}
+.nodes_list__controls {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.nodes_list__list_container {
+  min-height: 0;
+  max-height: 25rem;
+  overflow-y: auto;
+}
