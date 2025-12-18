@@ -1,9 +1,16 @@
-import { useCallback, useMemo } from 'react';
-import { ListItemButton, List, ListItemText, IconButton, Button, Tooltip } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import { Clear } from '@mui/icons-material';
-import type { Node } from '../../utils/types';
-import styles from './SidePanelNodeList.module.css';
+import { useCallback, useMemo } from "react";
+import {
+  ListItemButton,
+  List,
+  ListItemText,
+  IconButton,
+  Button,
+  Tooltip,
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { Clear } from "@mui/icons-material";
+import type { Node } from "../../utils/types";
+import styles from "./SidePanelNodeList.module.css";
 
 interface NodeListProps {
   nodes: Node[];
@@ -52,20 +59,33 @@ export const SidePanelNodeList: React.FC<NodeListProps> = ({
               size="small"
               onClick={onBulkGenerate}
               className={`${styles.nodes_list__extra_ctrl} ${styles.customButton}`}
-              sx={{ padding: 0, lineHeight: '1rem', fontWeight: 600, fontSize: '0.75rem' }}
+              sx={{
+                padding: 0,
+                lineHeight: "1rem",
+                fontWeight: 600,
+                fontSize: "0.75rem",
+              }}
             >
               Generate 1000
             </Button>
           </Tooltip>
 
           <Tooltip title="Clear all" placement="top">
-            <IconButton onClick={onClear} aria-label="clear" className={styles.nodes_list__ctrl}>
+            <IconButton
+              onClick={onClear}
+              aria-label="clear"
+              className={styles.nodes_list__ctrl}
+            >
               <Clear fontSize="small" />
             </IconButton>
           </Tooltip>
 
           <Tooltip title="Add node" placement="top">
-            <IconButton onClick={onAddNode} className={styles.nodes_list__ctrl} aria-label="add">
+            <IconButton
+              onClick={onAddNode}
+              className={styles.nodes_list__ctrl}
+              aria-label="add"
+            >
               <AddIcon fontSize="small" />
             </IconButton>
           </Tooltip>

@@ -1,7 +1,7 @@
-import * as go from 'gojs';
-import { ReactDiagram } from 'gojs-react';
-import { useEffect, useRef } from 'react';
-import styles from './DiagramWrapper.module.css';
+import * as go from "gojs";
+import { ReactDiagram } from "gojs-react";
+import { useEffect, useRef } from "react";
+import styles from "./DiagramWrapper.module.css";
 
 interface DiagramProps {
   nodeDataArray: Array<go.ObjectData>;
@@ -51,10 +51,16 @@ export const DiagramWrapper = ({
     if (!(diagram instanceof go.Diagram)) return;
 
     selectionListenerRef.current = (e: go.DiagramEvent) => onDiagramEvent(e);
-    diagram.addDiagramListener('ChangedSelection', selectionListenerRef.current);
+    diagram.addDiagramListener(
+      "ChangedSelection",
+      selectionListenerRef.current,
+    );
 
     return () => {
-      diagram.removeDiagramListener('ChangedSelection', selectionListenerRef.current);
+      diagram.removeDiagramListener(
+        "ChangedSelection",
+        selectionListenerRef.current,
+      );
     };
   }, []);
 
@@ -70,7 +76,7 @@ export const DiagramWrapper = ({
 
     if (curKey === selectedNodeId) return;
 
-    diagram.startTransaction('select from react');
+    diagram.startTransaction("select from react");
 
     if (!selectedNodeId) {
       diagram.clearSelection();
@@ -80,30 +86,30 @@ export const DiagramWrapper = ({
       else diagram.clearSelection();
     }
 
-    diagram.commitTransaction('select from react');
+    diagram.commitTransaction("select from react");
   }, [selectedNodeId]);
 
   const initDiagram = (): go.Diagram => {
     const diagram = new go.Diagram({
-      'undoManager.isEnabled': true,
-      'toolManager.mouseWheelBehavior': go.ToolManager.WheelZoom,
-      'clickCreatingTool.archetypeNodeData': {
-        type: 'Node',
-        text: 'New node',
-        loc: '0 0',
+      "undoManager.isEnabled": true,
+      "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
+      "clickCreatingTool.archetypeNodeData": {
+        type: "Node",
+        text: "New node",
+        loc: "0 0",
       },
 
       model: new go.GraphLinksModel({
-        nodeKeyProperty: 'key',
-        linkKeyProperty: 'key',
-        linkFromKeyProperty: 'from',
-        linkToKeyProperty: 'to',
+        nodeKeyProperty: "key",
+        linkKeyProperty: "key",
+        linkFromKeyProperty: "from",
+        linkToKeyProperty: "to",
         //Avoiding any duplications
         makeUniqueKeyFunction: (
           m: go.Model,
-          data: { key: string; type: 'Node'; text: string; loc: string },
+          data: { key: string; type: "Node"; text: string; loc: string },
         ) => {
-          console.log('MakeUniqKey', data);
+          console.log("MakeUniqKey", data);
           const k = nextNodeKey(m);
           data.key = k;
           return k;
@@ -112,7 +118,7 @@ export const DiagramWrapper = ({
           m: go.GraphLinksModel,
           data: { key: string; from: string; to: string },
         ) => {
-          console.log('makeUniqueLinkKeyFunction', data);
+          console.log("makeUniqueLinkKeyFunction", data);
           const k = nextLinkKey(m);
           data.key = k;
           return k;
@@ -120,30 +126,30 @@ export const DiagramWrapper = ({
       }),
     });
 
-    diagram.nodeTemplate = new go.Node('Auto')
-      .bindTwoWay('location', 'loc', go.Point.parse, go.Point.stringify)
+    diagram.nodeTemplate = new go.Node("Auto")
+      .bindTwoWay("location", "loc", go.Point.parse, go.Point.stringify)
       .add(
-        new go.Shape('RoundedRectangle', {
-          name: 'SHAPE',
-          fill: 'white',
+        new go.Shape("RoundedRectangle", {
+          name: "SHAPE",
+          fill: "white",
           strokeWidth: 0,
-          portId: '',
+          portId: "",
           fromLinkable: true,
           toLinkable: true,
-          cursor: 'pointer',
-        }).bind('fill', 'color'),
+          cursor: "pointer",
+        }).bind("fill", "color"),
 
         new go.TextBlock({
           margin: 8,
           editable: true,
-          font: '400 .875rem Roboto, sans-serif',
-        }).bindTwoWay('text'),
+          font: "400 .875rem Roboto, sans-serif",
+        }).bindTwoWay("text"),
       );
 
     diagram.linkTemplate = new go.Link()
-      .bindModel('relinkableFrom', 'canRelink')
-      .bindModel('relinkableTo', 'canRelink')
-      .add(new go.Shape(), new go.Shape({ toArrow: 'Standard' }));
+      .bindModel("relinkableFrom", "canRelink")
+      .bindModel("relinkableTo", "canRelink")
+      .add(new go.Shape(), new go.Shape({ toArrow: "Standard" }));
 
     return diagram;
   };

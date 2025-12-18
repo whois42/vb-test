@@ -1,9 +1,9 @@
-import * as go from 'gojs';
-import React, { useState } from 'react';
-import { DiagramWrapper } from '../../components/DiagramWrapper/DiagramWrapper';
-import { SidePanel } from '../../components/SidePanel/SidePanel';
-import styles from './NetworkVisualisator.module.css';
-import { generateConnectedGraph } from '../../utils/helpers';
+import * as go from "gojs";
+import React, { useState } from "react";
+import { DiagramWrapper } from "../../components/DiagramWrapper/DiagramWrapper";
+import { SidePanel } from "../../components/SidePanel/SidePanel";
+import styles from "./NetworkVisualisator.module.css";
+import { generateConnectedGraph } from "../../utils/helpers";
 
 interface NetworkVisualisatorState {
   nodeDataArray: Array<go.ObjectData>;
@@ -22,16 +22,24 @@ const initialState: NetworkVisualisatorState = {
 };
 
 export const NetworkVisualisator: React.FC = () => {
-  const [nodeDataArray, setNodeDataArray] = useState<go.ObjectData[]>(initialState.nodeDataArray);
-  const [linkDataArray, setLinkDataArray] = useState<go.ObjectData[]>(initialState.linkDataArray);
-  const [modelData, setModelData] = useState<go.ObjectData>(initialState.modelData);
-  const [selectedKey, setSelectedKey] = useState<string | null>(initialState.selectedKey);
+  const [nodeDataArray, setNodeDataArray] = useState<go.ObjectData[]>(
+    initialState.nodeDataArray,
+  );
+  const [linkDataArray, setLinkDataArray] = useState<go.ObjectData[]>(
+    initialState.linkDataArray,
+  );
+  const [modelData, setModelData] = useState<go.ObjectData>(
+    initialState.modelData,
+  );
+  const [selectedKey, setSelectedKey] = useState<string | null>(
+    initialState.selectedKey,
+  );
   const [skipsDiagramUpdate, setSkipsDiagramUpdate] = useState<boolean>(
     initialState.skipsDiagramUpdate,
   );
 
   const handleDiagramEvent = (e: go.DiagramEvent) => {
-    if (e.name === 'ChangedSelection') {
+    if (e.name === "ChangedSelection") {
       const sel = e.subject.first();
       if (sel && sel.data) {
         setSelectedKey(sel.data.key);
@@ -70,7 +78,9 @@ export const NetworkVisualisator: React.FC = () => {
     }
 
     if (removedNodeKeys && removedNodeKeys.length > 0) {
-      setNodeDataArray((prev) => prev.filter((n) => !removedNodeKeys.includes(n.key)));
+      setNodeDataArray((prev) =>
+        prev.filter((n) => !removedNodeKeys.includes(n.key)),
+      );
     }
 
     // Links
@@ -93,7 +103,9 @@ export const NetworkVisualisator: React.FC = () => {
     }
 
     if (removedLinkKeys && removedLinkKeys.length > 0) {
-      setLinkDataArray((prev) => prev.filter((l) => !removedLinkKeys.includes(l.key)));
+      setLinkDataArray((prev) =>
+        prev.filter((l) => !removedLinkKeys.includes(l.key)),
+      );
     }
 
     if (modelChanges) {
@@ -129,7 +141,7 @@ export const NetworkVisualisator: React.FC = () => {
         {
           key: `node-${prev.length + 1}`,
           text: `New node`,
-          loc: '0 0',
+          loc: "0 0",
         },
       ];
     });
@@ -156,7 +168,7 @@ export const NetworkVisualisator: React.FC = () => {
         nodes={nodeDataArray.map((node) => ({
           id: node.key,
           name: node.text,
-          type: 'Node',
+          type: "Node",
         }))}
         selectedNodeId={selectedKey}
         onSelectNode={handleSelectNodeFromList}

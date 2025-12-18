@@ -1,6 +1,6 @@
-import TextField from '@mui/material/TextField';
-import type { Node } from '../../utils/types';
-import styles from './PropertiesPanel.module.css';
+import TextField from "@mui/material/TextField";
+import type { Node } from "../../utils/types";
+import styles from "./PropertiesPanel.module.css";
 
 interface PropertiesPanelProps {
   selectedNode: Node | null;
@@ -33,7 +33,12 @@ export const PropertiesPanel: React.FC<PropertiesPanelProps> = ({
             autoComplete="off"
           />
 
-          <TextField label="Type" size="small" value={selectedNode.type} disabled />
+          <TextField
+            label="Type"
+            size="small"
+            value={selectedNode.type}
+            disabled
+          />
         </div>
       ) : (
         <div className={styles.properties_panel__properties_container__empty}>

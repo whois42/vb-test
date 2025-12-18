@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
-import { Divider } from '@mui/material';
-import { PropertiesPanel } from '../PropertiesPanel/PropertiesPanel';
-import { SidePanelNodeList } from '../SidePanelNodeList/SidePanelNodeList';
-import type { Node } from '../../utils/types';
-import styles from './SidePanel.module.css';
+import { useMemo } from "react";
+import { Divider } from "@mui/material";
+import { PropertiesPanel } from "../PropertiesPanel/PropertiesPanel";
+import { SidePanelNodeList } from "../SidePanelNodeList/SidePanelNodeList";
+import type { Node } from "../../utils/types";
+import styles from "./SidePanel.module.css";
 
 interface SidePanelProps {
   nodes: Node[];
@@ -44,7 +44,10 @@ export const SidePanel: React.FC<SidePanelProps> = ({
         onClear={onClear}
       />
       <Divider />
-      <PropertiesPanel selectedNode={selectedNode} onChangeNodeLabel={onChangeNodeLabel} />
+      <PropertiesPanel
+        selectedNode={selectedNode}
+        onChangeNodeLabel={onChangeNodeLabel}
+      />
     </div>
   );
 };

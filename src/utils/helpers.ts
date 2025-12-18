@@ -1,9 +1,9 @@
-import * as go from 'gojs';
+import * as go from "gojs";
 
 export type GoNodeData = go.ObjectData & {
   key: string;
   text: string;
-  type: 'Node';
+  type: "Node";
 };
 
 export type GoLinkData = go.ObjectData & {
@@ -25,7 +25,11 @@ export function nodeAt(
   return idx >= 0 && idx < nodes.length ? nodes[idx] : null;
 }
 
-export function hasDirectedLink(links: GoLinkData[], from: string, to: string): boolean {
+export function hasDirectedLink(
+  links: GoLinkData[],
+  from: string,
+  to: string,
+): boolean {
   return links.some((el) => el.from === from && el.to === to);
 }
 
@@ -36,7 +40,8 @@ export function addDirectedLink(
   nextLinkId: number,
 ): { links: GoLinkData[]; added: boolean; nextLinkId: number } {
   if (from === to) return { links, added: false, nextLinkId };
-  if (hasDirectedLink(links, from, to)) return { links, added: false, nextLinkId };
+  if (hasDirectedLink(links, from, to))
+    return { links, added: false, nextLinkId };
 
   const link: GoLinkData = { key: `link-${nextLinkId}`, from, to };
   return {
@@ -51,11 +56,14 @@ export const generateConnectedGraph = (
   extraLinksPerNode = 1,
   random: RandomFn = Math.random, // needed for testing to provide deterministic randomness
 ): { nodeDataArray: GoNodeData[]; linkDataArray: GoLinkData[] } => {
-  const nodeDataArray: GoNodeData[] = Array.from({ length: nodeCount }, (_, i) => {
-    const key = `node-${i + 1}`;
-    const label = `Node ${i + 1}`;
-    return { key, text: label, type: 'Node' };
-  });
+  const nodeDataArray: GoNodeData[] = Array.from(
+    { length: nodeCount },
+    (_, i) => {
+      const key = `node-${i + 1}`;
+      const label = `Node ${i + 1}`;
+      return { key, text: label, type: "Node" };
+    },
+  );
 
   let linkDataArray: GoLinkData[] = [];
   let nextLinkId = 1;
